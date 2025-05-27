@@ -7,7 +7,7 @@ source /root/.bash_profile
 source $path/env
 cd $path 
 
-version=$(docker compose exec blockcastd blockcastd init | grep "Commit Tag:" | awk '{print %NF}')
+version=$(docker compose exec blockcastd blockcastd init | grep "Commit Tag:" | awk '{print $NF}')
 docker_status=$(docker inspect $CONTAINER | jq -r .[].State.Status)
 
 case $docker_status in
