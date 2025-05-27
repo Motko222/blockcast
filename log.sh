@@ -4,4 +4,4 @@ folder=$(echo $path | awk -F/ '{print $NF}')
 source $path/env
 
 cd $WORKDIR
-docker compose logs -f -t 100
+docker compose logs -f --tail 200
