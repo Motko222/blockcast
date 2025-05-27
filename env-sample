@@ -1,0 +1,6 @@
+ID=1
+WORKDIR=/root/beacon-docker-compose
+CONTAINER=beacond
+GIT=https://github.com/Blockcast/beacon-docker-compose.git
+NETWORK=testnet
+CHAIN=testnet
