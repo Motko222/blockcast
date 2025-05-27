@@ -7,7 +7,7 @@ source /root/.bash_profile
 source $path/env
 
 version=$()
-docker_status=$(docker $CONTAINER | jq -r .[].State.Status)
+docker_status=$(docker inspect $CONTAINER | jq -r .[].State.Status)
 
 case $docker_status in
   running) status="ok" ;;
