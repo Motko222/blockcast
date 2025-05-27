@@ -11,8 +11,7 @@ docker_status=$(docker inspect $CONTAINER | jq -r .[].State.Status)
 
 case $docker_status in
   running) status="ok" ;;
-  restarting) status="warning"; message="docker restarting" ;;
-  *) status="error"; message="docker not running" ;;
+  *) status="error"; message="docker not running ($docker_status)" ;;
 esac
 
 cat >$json << EOF
