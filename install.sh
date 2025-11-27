@@ -9,5 +9,6 @@ nano env
 source $path/env
 
 cd /root
-[ -d $WORKDIR ] && rm $WORKDIR
+[ -d .blockcast ] && rm -r .blockcast
+[ -d $WORKDIR ] && rm -r $WORKDIR
 git clone $GIT
