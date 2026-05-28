@@ -5,4 +5,3 @@ source $path/env
 
 cd $WORKDIR
 docker compose --profile managed up -d
-docker compose logs -f
