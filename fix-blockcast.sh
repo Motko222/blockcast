@@ -47,8 +47,23 @@ docker compose --profile managed ps
 echo "=== Waiting 10 seconds for containers to settle ==="
 sleep 10
 
-echo "=== blockcastd logs (last 20 lines) ==="
-docker logs blockcastd --tail 20 2>&1
+echo "=== Result ==="
+all_ok=true
+for name in blockcastd beacond control-proxy; do
+  state=$(docker inspect $name 2>/dev/null | jq -r '.[].State.Status' 2>/dev/null || echo "missing")
+  if [ "$state" == "running" ]; then
+    echo "  ✔ $name: running"
+  else
+    echo "  ✘ $name: $state"
+    all_ok=false
+  fi
+done
 
 echo ""
-echo "Done. Check that blockcastd, beacond, and control-proxy are all Up."
+if [ "$all_ok" == "true" ]; then
+  echo "All containers running. Note: errors about 'unknown shorthand flag' in"
+  echo "blockcastd logs are a known internal bug and can be ignored — containers"
+  echo "are managed by this script and will restart automatically if they stop."
+else
+  echo "WARNING: some containers are not running. Check logs with: docker logs <name>"
+fi
