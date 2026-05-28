@@ -4,5 +4,5 @@ folder=$(echo $path | awk -F/ '{print $NF}')
 source $path/env
 
 cd $WORKDIR
-docker compose up -d
+docker compose --profile managed up -d
 docker compose logs -f
